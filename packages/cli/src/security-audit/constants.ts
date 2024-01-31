@@ -50,6 +50,7 @@ export const FILESYSTEM_INTERACTION_NODE_TYPES = new Set([
 
 export const OFFICIAL_RISKY_NODE_TYPES = new Set([
 	'n8n-nodes-base.executeCommand',
+	'n8n-nodes-base.executeEmpty',
 	'n8n-nodes-base.code',
 	'n8n-nodes-base.function',
 	'n8n-nodes-base.functionItem',

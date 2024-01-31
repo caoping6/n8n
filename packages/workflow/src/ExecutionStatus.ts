@@ -8,4 +8,5 @@ export type ExecutionStatus =
 	| 'success'
 	| 'unknown'
 	| 'waiting'
+	| 'delete'
 	| 'warning';

@@ -485,6 +485,7 @@
       "dist/nodes/ErrorTrigger/ErrorTrigger.node.js",
       "dist/nodes/Eventbrite/EventbriteTrigger.node.js",
       "dist/nodes/ExecuteCommand/ExecuteCommand.node.js",
+      "dist/nodes/ExecuteEmpty/ExecuteEmpty.node.js",
       "dist/nodes/ExecuteWorkflow/ExecuteWorkflow.node.js",
       "dist/nodes/ExecuteWorkflowTrigger/ExecuteWorkflowTrigger.node.js",
       "dist/nodes/ExecutionData/ExecutionData.node.js",

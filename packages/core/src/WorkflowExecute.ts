@@ -893,6 +893,12 @@ export class WorkflowExecute {
 						this.runExecutionData.executionData!.nodeExecutionStack.shift() as IExecuteData;
 					executionNode = executionData.node;
 
+					if(executionNode.type === "n8n-nodes-base.executeEmpty"){
+						throw new ApplicationError(
+							'It ran to a empty node',
+						);
+					}
+
 					// Update the pairedItem information on items
 					const newTaskDataConnections: ITaskDataConnections = {};
 					for (const inputName of Object.keys(executionData.data)) {
@@ -1716,6 +1722,9 @@ export class WorkflowExecute {
 						}
 					}
 
+					if(error.message === "It ran to a empty node"){
+						fullRunData.status = "delete";
+					}
 					return fullRunData;
 				});
 

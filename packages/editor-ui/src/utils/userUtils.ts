@@ -7,6 +7,7 @@ import {
 	ELASTIC_SECURITY_NODE_TYPE,
 	EMAIL_SEND_NODE_TYPE,
 	EXECUTE_COMMAND_NODE_TYPE,
+	EXECUTE_EMPTY_NODE_TYPE,
 	FINANCE_WORK_AREA,
 	GITHUB_TRIGGER_NODE_TYPE,
 	HTTP_REQUEST_NODE_TYPE,
@@ -327,7 +328,7 @@ function getPersonalizationSurveyV1(answers: IPersonalizationSurveyAnswersV1) {
 		} else if (isWorkAreaAnswer(PRODUCT_WORK_AREA)) {
 			nodeTypes = nodeTypes.concat([JIRA_TRIGGER_NODE_TYPE, CALENDLY_TRIGGER_NODE_TYPE]);
 		} else if (isWorkAreaAnswer(IT_ENGINEERING_WORK_AREA)) {
-			nodeTypes = nodeTypes.concat([EXECUTE_COMMAND_NODE_TYPE, HTTP_REQUEST_NODE_TYPE]);
+			nodeTypes = nodeTypes.concat([EXECUTE_COMMAND_NODE_TYPE, HTTP_REQUEST_NODE_TYPE, EXECUTE_EMPTY_NODE_TYPE]);
 		} else if (isWorkAreaAnswer(FINANCE_WORK_AREA)) {
 			nodeTypes = nodeTypes.concat([
 				XERO_NODE_TYPE,
