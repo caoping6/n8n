@@ -5,6 +5,8 @@ import { EnterpriseWorkflowService } from '../workflows/workflow.service.ee';
 import type { WorkflowWithSharingsAndCredentials } from '@/workflows/workflows.types';
 import { WorkflowRepository } from '@/databases/repositories/workflow.repository';
 import { Service } from 'typedi';
+import { parse, stringify } from 'flatted';
+import { Logger } from '@/Logger';
 
 @Service()
 export class EnterpriseExecutionsService {
@@ -12,6 +14,8 @@ export class EnterpriseExecutionsService {
 		private readonly executionService: ExecutionService,
 		private readonly workflowRepository: WorkflowRepository,
 		private readonly enterpriseWorkflowService: EnterpriseWorkflowService,
+		private readonly logger: Logger,
+
 	) {}
 
 	async findOne(
@@ -40,6 +44,10 @@ export class EnterpriseExecutionsService {
 			sharedWith: workflow.sharedWith,
 			usedCredentials: workflow.usedCredentials,
 		} as WorkflowWithSharingsAndCredentials;
+
+
+		const parseData = stringify(execution.data);
+		execution.data = parseData;
 
 		return execution;
 	}

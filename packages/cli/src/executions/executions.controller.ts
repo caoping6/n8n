@@ -10,6 +10,7 @@ import config from '@/config';
 import { jsonParse } from 'n8n-workflow';
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
 import { ActiveExecutionService } from './active-execution.service';
+import { Logger } from '@/Logger';
 
 @Authorized()
 @RestController('/executions')
@@ -22,6 +23,7 @@ export class ExecutionsController {
 		private readonly workflowSharingService: WorkflowSharingService,
 		private readonly activeExecutionService: ActiveExecutionService,
 		private readonly license: License,
+		private readonly logger: Logger,
 	) {}
 
 	private async getAccessibleWorkflowIds(user: User) {
@@ -66,6 +68,8 @@ export class ExecutionsController {
 	@Get('/:id')
 	async getOne(req: ExecutionRequest.GetOne) {
 		const workflowIds = await this.getAccessibleWorkflowIds(req.user);
+
+		this.logger.info("execution get Id=" + req.params.id);
 
 		if (workflowIds.length === 0) throw new NotFoundError('Execution not found');
 

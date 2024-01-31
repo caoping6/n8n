@@ -233,7 +233,7 @@ export class ExecutionRepository extends Repository<ExecutionEntity> {
 		await this.executionDataRepository.insert({
 			executionId,
 			workflowData: { connections, nodes, name, settings, id: workflowData.id },
-			data: stringify(data),
+			data: JSON.stringify(data),
 		});
 		return String(executionId);
 	}
@@ -277,7 +277,7 @@ export class ExecutionRepository extends Repository<ExecutionEntity> {
 				executionData.workflowData = workflowData;
 			}
 			if (data) {
-				executionData.data = stringify(data);
+				executionData.data = JSON.stringify(data);
 			}
 			// @ts-ignore
 			await this.executionDataRepository.update({ executionId }, executionData);

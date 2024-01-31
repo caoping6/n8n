@@ -31,6 +31,7 @@ import { WorkflowRepository } from '@db/repositories/workflow.repository';
 import { Logger } from '@/Logger';
 import { InternalServerError } from '@/errors/response-errors/internal-server.error';
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
+import {stringify} from "flatted";
 
 const schemaGetExecutionsQueryFilter = {
 	$id: '/IGetExecutionsQueryFilter',
@@ -174,6 +175,8 @@ export class ExecutionService {
 			execution.status = getStatusUsingPreviousExecutionStatusMethod(execution);
 		}
 
+		const parseData = stringify(execution.data);
+		execution.data = parseData;
 		return execution;
 	}
 
