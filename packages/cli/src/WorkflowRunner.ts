@@ -87,12 +87,6 @@ export class WorkflowRunner {
 	) {
 		ErrorReporter.error(error);
 
-		this.logger.info("process error" + error.message);
-		if(error.message === "DELETE EXECUTION"){
-
-			this.executionRepository.deleteByIds([executionId]);
-		}
-
 		const isQueueMode = config.getEnv('executions.mode') === 'queue';
 
 		// in queue mode, first do a sanity run for the edge case that the execution was not marked as stalled
@@ -398,11 +392,6 @@ export class WorkflowRunner {
 
 			workflowExecution
 				.then((fullRunData) => {
-					this.logger.info(`fullRunData status=` + fullRunData.status);
-					if(fullRunData.status === "delete"){
-						this.executionRepository.deleteByIds([executionId]);
-					}
-
 					clearTimeout(executionTimeout);
 					if (workflowExecution.isCanceled) {
 						fullRunData.finished = false;

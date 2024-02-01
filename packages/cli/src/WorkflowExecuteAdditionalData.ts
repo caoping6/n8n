@@ -356,6 +356,7 @@ function hookFunctionsPush(): IWorkflowExecuteHooks {
 }
 
 export function hookFunctionsPreExecute(): IWorkflowExecuteHooks {
+	const logger = Container.get(Logger);
 	const externalHooks = Container.get(ExternalHooks);
 	return {
 		workflowExecuteBefore: [
@@ -370,6 +371,12 @@ export function hookFunctionsPreExecute(): IWorkflowExecuteHooks {
 				data: ITaskData,
 				executionData: IRunExecutionData,
 			): Promise<void> {
+				const currentNode = this.workflowData.nodes.find((n) => n.name === nodeName);
+				if (currentNode && currentNode.type === "n8n-nodes-base.executeEmpty"){
+					logger.info("delete=" + currentNode.type);
+					await Container.get(ExecutionRepository).deleteByIds([this.executionId]);
+					return;
+				}
 				await saveExecutionProgress(
 					this.workflowData,
 					this.executionId,
